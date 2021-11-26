@@ -35,7 +35,7 @@ ssize_t BEGIN_API(ctx_block, I2CMaster_Write, int fd, I2C_DeviceAddress address,
     ctx_block.length = length;
     memcpy(&ctx_block.data_block.data, data, length);
 
-    SEND_MSG(I2CMaster_Write_c, VARIABLE_BLOCK_SIZE(I2CMaster_Write, length), CORE_BLOCK_SIZE(I2CMaster_Write), false);
+    SEND_MSG(I2CMaster_Write_c, VARIABLE_BLOCK_SIZE(I2CMaster_Write, length), CORE_BLOCK_SIZE(I2CMaster_Write), true);
     ctx_block.returns = ctx_block.header.respond ? ctx_block.returns : length;
 }
 END_API(I2CMaster_Write)
