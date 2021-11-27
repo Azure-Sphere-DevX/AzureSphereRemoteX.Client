@@ -17,7 +17,7 @@ static int64_t rx_get_now_milliseconds(void)
     return now.tv_sec * 1000 + now.tv_nsec / 1000000;
 }
 
-#define TIME(name, arguments, ...)                           \
+#define TIME(arguments, ...)                                 \
     static uint64_t total_time = 0;                          \
     static int count = 0;                                    \
     uint64_t start = rx_get_now_milliseconds();              \
@@ -25,7 +25,7 @@ static int64_t rx_get_now_milliseconds(void)
                    uint64_t end = rx_get_now_milliseconds(); \
     total_time += (end - start);                             \
     count++;                                                 \
-    printf("Name: %s, errno: %d, Time: %d, Avg: %d\n", name, ctx_block.err_no, (int)(end - start), (int)(total_time / count));
+    printf("Name: %s, errno: %d, Time: %d, Avg: %d\n", __func__, ctx_block.err_no, (int)(end - start), (int)(total_time / count));
 
 #define BEGIN_API(context, name, arguments, ...) \
     name(arguments, ##__VA_ARGS__)               \
