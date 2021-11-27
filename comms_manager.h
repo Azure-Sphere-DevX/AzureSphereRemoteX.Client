@@ -49,7 +49,7 @@ static int64_t rx_get_now_milliseconds(void)
     memset(&ctx_block, 0x00, sizeof(TYPE))
 
 #define SEND_MSG(command, request_length, response_length, response_required)                                          \
-    ssize_t bytes_returned = socket_send_msg(&ctx_block, command, request_length, response_length, response_required); \
+    ssize_t bytes_returned = socket_send_msg(&ctx_block, command##_c, request_length, response_length, response_required); \
     if (bytes_returned < 0)                                                                                            \
     {                                                                                                                  \
         return bytes_returned;                                                                                         \

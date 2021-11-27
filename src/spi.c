@@ -58,7 +58,7 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_WriteThenRead, int fd, const uint8_t *wri
     ctx_block.lenReadData = lenReadData;
     memcpy(&ctx_block.data_block.data, writeData, lenWriteData);
 
-    SEND_MSG(SPIMaster_WriteThenRead_c,
+    SEND_MSG(SPIMaster_WriteThenRead,
              VARIABLE_BLOCK_SIZE(SPIMaster_WriteThenRead, lenWriteData),
              VARIABLE_BLOCK_SIZE(SPIMaster_WriteThenRead, lenReadData),
              true);
@@ -157,7 +157,7 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_TransferSequential, int fd, const SPIMast
         response_length = VARIABLE_BLOCK_SIZE(SPIMaster_TransferSequential, total_length);
     }
 
-    SEND_MSG(SPIMaster_TransferSequential_c,
+    SEND_MSG(SPIMaster_TransferSequential,
             VARIABLE_BLOCK_SIZE(SPIMaster_TransferSequential, ctx_block.length),
             response_length,
             transfers->flags == SPI_TransferFlags_Read);
