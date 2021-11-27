@@ -20,6 +20,12 @@ extern "C" {
 #define SPI_STRUCTS_VERSION 1
 #endif
 
+// MT3620 SPI CS A, it must not be used as a peripheral in app_manifest
+#define MT3620_SPI_CS_A (-1)
+
+// MT3620 SPI CS B, it must not be used as a peripheral in app_manifest
+#define MT3620_SPI_CS_B (-2)
+
 /// <summary>
 ///     The maximum number of transfer requests that you can pass to
 ///     <see cref="SPIMaster_TransferSequential"/>.
