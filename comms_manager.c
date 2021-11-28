@@ -10,20 +10,18 @@ bool create_socket(void)
     int retry_count = 0;
     int connect_status = -1;
 
+#ifndef AZURE_SPHERE_REMOTEX_IP
+    printf("No AZURE_SPHERE_REMOTEX_IP variable defined in root CMakeLists.txt\n");
+    printf("Add the following to CMakeLists.txt\n");
+    printf("add_compile_definitions(AZURE_SPHERE_REMOTEX_IP = \"xxx.xxx.xxx.xxx\"\n");
+
+    return false;
+#endif
+
     if (initialized)
     {
         return true;
     }
-
-#ifndef AZURE_SPHERE_REMOTEX_IP
-    printf("No AZURE_SPHERE_REMOTEX_IP variable defined in root cmakelists.txt\n");
-    printf("Add the following to cmakelists.txt\n");
-    printf("add_compile_definitions(AZURE_SPHERE_REMOTEX_IP = \"xxx.xxx.xxx.xxx\"\n");
-
-    initialized = true;
-
-    return false;
-#endif
 
     sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -76,7 +74,9 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
 {
     size_t bytes_received = 0;
 
-    create_socket();
+    if (!create_socket()){
+        return -1;
+    }
 
     CTX_HEADER *header = (CTX_HEADER *)msg;
 
@@ -91,7 +91,7 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
     header->respond = true;
 #endif
 
-    if (send(sock_fd, msg, request_length, 0) != request_length)
+    if (send(sock_fd, msg, request_length, 0) != (ssize_t)request_length)
     {
         // puts("Send to Azure Sphere RemoteX failed\n");
         return -1;
