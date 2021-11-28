@@ -74,7 +74,7 @@ bool create_socket(void)
 
 ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_t response_length, bool respond)
 {
-    ssize_t bytes_received = 0;
+    size_t bytes_received = 0;
 
     create_socket();
 

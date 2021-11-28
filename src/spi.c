@@ -159,12 +159,12 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_TransferSequential, int fd, const SPIMast
 
     SEND_MSG(SPIMaster_TransferSequential,
             VARIABLE_BLOCK_SIZE(SPIMaster_TransferSequential, ctx_block.length),
-            response_length,
+            (ssize_t)response_length,
             transfers->flags == SPI_TransferFlags_Read);
 
     if (read_transfer)
     {
-        uint8_t *data_ptr = ctx_block.data_block.data;
+        data_ptr = ctx_block.data_block.data;
 
         for (size_t i = 0; i < transferCount; i++)
         {
