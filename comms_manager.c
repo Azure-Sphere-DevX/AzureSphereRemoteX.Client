@@ -82,6 +82,7 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
 
     header->block_length = (uint16_t)request_length;
     header->cmd = command;
+    header->contract_version = REMOTEX_CONTRACT_VERSION;
 
     header->response_length = response_length;
 
@@ -113,6 +114,10 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
         {
             break;
         }
+    }
+
+    if (((CTX_HEADER *)receive_buffer)->contract_version < REMOTEX_CONTRACT_VERSION){
+        printf("AzureSphereRemoteX.Service is running with an out of date contact definition. Update RemoteX.Service with the latest contract.h and redeploy to Azure Sphere.\n");
     }
 
     if (bytes_received <= response_length)
