@@ -1,4 +1,5 @@
 #include "comms_manager.h"
+#include "applibs/remotex.h"
 
 static bool initialized = false;
 static int sock_fd;
@@ -67,7 +68,10 @@ bool create_socket(void)
 
     initialized = true;
 
-    puts("Connected to Azure Sphere RemoteX\n");
+    printf("\nConnected to Azure Sphere RemoteX.\n");
+    char platform_information[128];
+    RemoteX_PlatformInformation(platform_information, sizeof(platform_information));
+    printf("%s\n\n", platform_information);
 
     return true;
 }

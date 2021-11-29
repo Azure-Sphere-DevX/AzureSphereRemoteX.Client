@@ -15,6 +15,7 @@ set(Source
     "src/adc.c"
     "src/spi.c"
     "src/storage.c"
+    "src/remotex.c"
 )
 source_group("Source" FILES ${Source})
 
