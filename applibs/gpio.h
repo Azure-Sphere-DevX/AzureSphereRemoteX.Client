@@ -13,8 +13,8 @@ extern "C" {
 
 #include <stdint.h>
 #include <errno.h>
-#include "../contract.h"
-#include "../comms_manager.h"
+#include "contract.h"
+#include "comms_manager.h"
 
 /// <summary>
 ///     Specifies the type of a GPIO ID, which is used to specify a GPIO peripheral instance.

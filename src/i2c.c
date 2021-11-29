@@ -1,4 +1,4 @@
-#include "../applibs/i2c.h"
+#include "applibs/i2c.h"
 
 int BEGIN_API(ctx_block, I2CMaster_Open, I2C_InterfaceId id)
 {

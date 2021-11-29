@@ -2,7 +2,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include <sys/types.h>
 
 #define REMOTEX_CONTRACT_VERSION 3

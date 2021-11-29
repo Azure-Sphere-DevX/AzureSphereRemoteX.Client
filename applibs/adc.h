@@ -7,8 +7,8 @@
 /// caller must ensure thread safety when accessing the same ADC channel.
 #pragma once
 
-#include "../contract.h"
-#include "../comms_manager.h"
+#include "contract.h"
+#include "comms_manager.h"
 #include <errno.h>
 #include <stdint.h>
 

@@ -1,4 +1,4 @@
-#include "../applibs/gpio.h"
+#include "applibs/gpio.h"
 
 int BEGIN_API(ctx_block, GPIO_OpenAsOutput, GPIO_Id gpioId, GPIO_OutputMode_Type outputMode, GPIO_Value_Type initialValue)
 {

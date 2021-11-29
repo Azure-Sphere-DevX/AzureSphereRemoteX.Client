@@ -38,7 +38,9 @@ bool create_socket(void)
 
     while (retry_count < 10)
     {
-        printf("Attempting connection to Azure Sphere RemoteX...\n");
+#ifdef AZURE_SPHERE_REMOTEX_IP
+        printf("Attempting connection to Azure Sphere RemoteX on IP address %s...\n", AZURE_SPHERE_REMOTEX_IP);
+#endif
         if ((connect_status = connect(sock_fd, (struct sockaddr *)&server, sizeof(server))) < 0)
         {
             printf("Connection to Azure Sphere RemoteX failed\n");
@@ -74,7 +76,8 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
 {
     size_t bytes_received = 0;
 
-    if (!create_socket()){
+    if (!create_socket())
+    {
         return -1;
     }
 
@@ -116,7 +119,8 @@ ssize_t socket_send_msg(void *msg, uint8_t command, size_t request_length, size_
         }
     }
 
-    if (bytes_received > 0 && ((CTX_HEADER *)receive_buffer)->contract_version < REMOTEX_CONTRACT_VERSION){
+    if (bytes_received > 0 && ((CTX_HEADER *)receive_buffer)->contract_version < REMOTEX_CONTRACT_VERSION)
+    {
         printf("AzureSphereRemoteX.Service is running with an out of date contact definition. Update RemoteX.Service with the latest contract.h and redeploy to Azure Sphere.\n");
     }
 

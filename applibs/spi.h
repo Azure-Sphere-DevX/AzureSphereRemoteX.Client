@@ -8,8 +8,8 @@
 extern "C" {
 #endif
 
-#include "../comms_manager.h"
-#include "../contract.h"
+#include "comms_manager.h"
+#include "contract.h"
 #include <errno.h>
 #include <stddef.h>
 #include <stdint.h>

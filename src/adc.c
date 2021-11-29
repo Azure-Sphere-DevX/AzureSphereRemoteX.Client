@@ -1,4 +1,4 @@
-#include "../applibs/adc.h"
+#include "applibs/adc.h"
 
 int BEGIN_API(ctx_block, ADC_Open, ADC_ControllerId id)
 {

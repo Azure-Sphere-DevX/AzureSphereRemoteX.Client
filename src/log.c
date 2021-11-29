@@ -1,4 +1,4 @@
-#include "../applibs/log.h"
+#include "applibs/log.h"
 
 void Log_Debug(const char *fmt, ...)
 {

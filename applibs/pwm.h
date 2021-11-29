@@ -6,8 +6,8 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include "../contract.h"
-#include "../comms_manager.h"
+#include "contract.h"
+#include "comms_manager.h"
 #include <errno.h>
 
 #pragma once

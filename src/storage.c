@@ -1,7 +1,7 @@
-#include "../applibs/storage.h"
+#include "applibs/storage.h"
 
-#include "../contract.h"
-#include "../comms_manager.h"
+#include "contract.h"
+#include "comms_manager.h"
 #include <errno.h>
 
 int BEGIN_API(ctx_block, Storage_OpenMutableFile, void)
