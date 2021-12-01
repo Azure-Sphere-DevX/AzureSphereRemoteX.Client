@@ -68,6 +68,11 @@ END_API
 
 ssize_t BEGIN_API(ctx_block, I2CMaster_Read, int fd, I2C_DeviceAddress address, uint8_t *buffer, size_t maxLength)
 {
+    if (maxLength > sizeof(ctx_block.data_block.data))
+    {
+        return -1;
+    }
+
     ctx_block.fd = fd;
     ctx_block.address = address;
     ctx_block.maxLength = maxLength;
