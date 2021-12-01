@@ -11,11 +11,11 @@ int BEGIN_API(ctx_block, PWM_Apply, int pwmFd, PWM_ChannelId pwmChannel, const P
 {
     ctx_block.pwmFd = pwmFd;
     ctx_block.pwmChannel = pwmChannel;
-    ctx_block.period_nsec = newState->period_nsec;
-    ctx_block.dutyCycle_nsec = newState->dutyCycle_nsec;
-    ctx_block.polarity = newState->polarity;
-    ctx_block.enabled = newState->enabled;
+    memcpy(ctx_block.data_block.data, newState, sizeof(PwmState));
 
-    SEND_MSG_WITH_DEFAULTS(PWM_Apply, false);
+    SEND_MSG(PWM_Apply,
+             VARIABLE_BLOCK_SIZE(PWM_Apply, sizeof(PwmState)),
+             CORE_BLOCK_SIZE(PWM_Apply),
+             true);
 }
 END_API

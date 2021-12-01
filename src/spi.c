@@ -2,22 +2,26 @@
 
 static SPIMaster_Transfer *cached_transfers = NULL;
 
-int BEGIN_API(ctx_block, SPIMaster_Open, SPI_InterfaceId interfaceId, SPI_ChipSelectId chipSelectId,
-              const SPIMaster_Config *config)
+int BEGIN_API(ctx_block, SPIMaster_Open, SPI_InterfaceId interfaceId, SPI_ChipSelectId chipSelectId, const SPIMaster_Config *config)
 {
     ctx_block.interfaceId = interfaceId;
     ctx_block.chipSelectId = chipSelectId;
-    ctx_block.csPolarity = config->csPolarity;
-    ctx_block.z__magicAndVersion = config->z__magicAndVersion;
-    SEND_MSG_WITH_DEFAULTS(SPIMaster_Open, true);
+    memcpy(ctx_block.data_block.data, config, sizeof(SPIMaster_Config));
+    
+    SEND_MSG(SPIMaster_Open,
+             VARIABLE_BLOCK_SIZE(SPIMaster_Open, sizeof(SPIMaster_Config)),
+             CORE_BLOCK_SIZE(SPIMaster_Open),
+             true);
 }
 END_API
 
 int BEGIN_API(ctx_block, SPIMaster_InitConfig, SPIMaster_Config *config)
 {
-    SEND_MSG_WITH_DEFAULTS(SPIMaster_InitConfig, true);
-    config->csPolarity = (SPI_ChipSelectPolarity)ctx_block.csPolarity;
-    config->z__magicAndVersion = ctx_block.z__magicAndVersion;
+    SEND_MSG(SPIMaster_InitConfig,
+             CORE_BLOCK_SIZE(SPIMaster_InitConfig),
+             VARIABLE_BLOCK_SIZE(SPIMaster_InitConfig, sizeof(SPIMaster_Config)),
+             true);
+    memcpy(config, &ctx_block.data_block.data, sizeof(SPIMaster_Config));
 }
 END_API
 
@@ -158,9 +162,9 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_TransferSequential, int fd, const SPIMast
     }
 
     SEND_MSG(SPIMaster_TransferSequential,
-            VARIABLE_BLOCK_SIZE(SPIMaster_TransferSequential, ctx_block.length),
-            (ssize_t)response_length,
-            transfers->flags == SPI_TransferFlags_Read);
+             VARIABLE_BLOCK_SIZE(SPIMaster_TransferSequential, ctx_block.length),
+             (ssize_t)response_length,
+             transfers->flags == SPI_TransferFlags_Read);
 
     if (read_transfer)
     {
