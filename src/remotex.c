@@ -28,7 +28,7 @@ static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, si
     SEND_MSG(RemoteX_Write,
              VARIABLE_BLOCK_SIZE(RemoteX_Write, lenWriteData),
              CORE_BLOCK_SIZE(RemoteX_Write),
-             false);
+             true);
 
     ctx_block.returns = ctx_block.header.respond ? ctx_block.returns : lenWriteData;
 }
@@ -59,7 +59,7 @@ static int64_t BEGIN_API(ctx_block, RemoteX_Lseek, int fd, uint64_t offset, int 
     ctx_block.offset = offset;
     ctx_block.whence = whence;
 
-    SEND_MSG_WITH_DEFAULTS(RemoteX_Lseek, false);
+    SEND_MSG_WITH_DEFAULTS(RemoteX_Lseek, true);
 }
 END_API(Storage_Lseek)
 

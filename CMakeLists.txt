@@ -8,14 +8,15 @@ set(AZURE_SPHERE_REMOTE ON CACHE  BOOL "ENABLE AZURE SPHERE REMOTE" FORCE )
 ################################################################################
 set(Source
     "comms_manager.c"
+    "src/adc.c"
     "src/gpio.c"
     "src/i2c.c"
-    "src/pwm.c"
     "src/log.c"
-    "src/adc.c"
+    "src/pwm.c"
+    "src/remotex.c"
     "src/spi.c"
     "src/storage.c"
-    "src/remotex.c"
+    "src/uart.c"
 )
 source_group("Source" FILES ${Source})
 
