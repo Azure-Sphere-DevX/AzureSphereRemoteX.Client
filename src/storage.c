@@ -8,10 +8,10 @@ int BEGIN_API(ctx_block, Storage_OpenMutableFile, void)
 {
     SEND_MSG_WITH_DEFAULTS(Storage_OpenMutableFile, true);
 }
-END_API(Storage_OpenMutableFile)
+END_API
 
 int BEGIN_API(ctx_block, Storage_DeleteMutableFile, void)
 {
     SEND_MSG_WITH_DEFAULTS(Storage_DeleteMutableFile, true);
 }
-END_API(Storage_DeleteMutableFile)
+END_API

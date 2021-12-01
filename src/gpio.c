@@ -7,7 +7,7 @@ int BEGIN_API(ctx_block, GPIO_OpenAsOutput, GPIO_Id gpioId, GPIO_OutputMode_Type
     ctx_block.initialValue = initialValue;
     SEND_MSG_WITH_DEFAULTS(GPIO_OpenAsOutput, true);
 }
-END_API(GPIO_OpenAsOutput)
+END_API
 
 int BEGIN_API(ctx_block, GPIO_SetValue, int gpioFd, GPIO_Value_Type value)
 {
@@ -15,14 +15,14 @@ int BEGIN_API(ctx_block, GPIO_SetValue, int gpioFd, GPIO_Value_Type value)
     ctx_block.value = value;
     SEND_MSG_WITH_DEFAULTS(GPIO_SetValue, true);
 }
-END_API(GPIO_SetValue)
+END_API
 
 int BEGIN_API(ctx_block, GPIO_OpenAsInput, GPIO_Id gpioId)
 {
     ctx_block.gpioId = gpioId;
     SEND_MSG_WITH_DEFAULTS(GPIO_OpenAsInput, true);
 }
-END_API(GPIO_OpenAsInput)
+END_API
 
 int BEGIN_API(ctx_block, GPIO_GetValue, int gpioFd, GPIO_Value_Type *outValue)
 {
@@ -30,4 +30,4 @@ int BEGIN_API(ctx_block, GPIO_GetValue, int gpioFd, GPIO_Value_Type *outValue)
     SEND_MSG_WITH_DEFAULTS(GPIO_GetValue, true);
     *outValue = ctx_block.outValue;
 }
-END_API(GPIO_OpenAsInput)
+END_API

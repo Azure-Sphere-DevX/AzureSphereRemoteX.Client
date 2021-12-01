@@ -11,7 +11,7 @@ int BEGIN_API(ctx_block, SPIMaster_Open, SPI_InterfaceId interfaceId, SPI_ChipSe
     ctx_block.z__magicAndVersion = config->z__magicAndVersion;
     SEND_MSG_WITH_DEFAULTS(SPIMaster_Open, true);
 }
-END_API(SPIMaster_Open)
+END_API
 
 int BEGIN_API(ctx_block, SPIMaster_InitConfig, SPIMaster_Config *config)
 {
@@ -19,7 +19,7 @@ int BEGIN_API(ctx_block, SPIMaster_InitConfig, SPIMaster_Config *config)
     config->csPolarity = (SPI_ChipSelectPolarity)ctx_block.csPolarity;
     config->z__magicAndVersion = ctx_block.z__magicAndVersion;
 }
-END_API(SPIMaster_InitConfig)
+END_API
 
 int BEGIN_API(ctx_block, SPIMaster_SetBusSpeed, int fd, uint32_t speedInHz)
 {
@@ -27,7 +27,7 @@ int BEGIN_API(ctx_block, SPIMaster_SetBusSpeed, int fd, uint32_t speedInHz)
     ctx_block.speedInHz = speedInHz;
     SEND_MSG_WITH_DEFAULTS(SPIMaster_SetBusSpeed, true);
 }
-END_API(SPIMaster_SetBusSpeed)
+END_API
 
 int BEGIN_API(ctx_block, SPIMaster_SetMode, int fd, SPI_Mode mode)
 {
@@ -35,7 +35,7 @@ int BEGIN_API(ctx_block, SPIMaster_SetMode, int fd, SPI_Mode mode)
     ctx_block.mode = mode;
     SEND_MSG_WITH_DEFAULTS(SPIMaster_SetMode, true);
 }
-END_API(SPIMaster_SetMode)
+END_API
 
 int BEGIN_API(ctx_block, SPIMaster_SetBitOrder, int fd, SPI_BitOrder order)
 {
@@ -43,7 +43,7 @@ int BEGIN_API(ctx_block, SPIMaster_SetBitOrder, int fd, SPI_BitOrder order)
     ctx_block.order = order;
     SEND_MSG_WITH_DEFAULTS(SPIMaster_SetBitOrder, true);
 }
-END_API(SPIMaster_SetBitOrder)
+END_API
 
 ssize_t BEGIN_API(ctx_block, SPIMaster_WriteThenRead, int fd, const uint8_t *writeData, size_t lenWriteData,
                   uint8_t *readData, size_t lenReadData)
@@ -65,7 +65,7 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_WriteThenRead, int fd, const uint8_t *wri
 
     memcpy(readData, ctx_block.data_block.data, lenReadData);
 }
-END_API(SPIMaster_WriteThenRead)
+END_API
 
 int SPIMaster_InitTransfers(SPIMaster_Transfer *transfers, size_t transferCount)
 {
@@ -179,4 +179,4 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_TransferSequential, int fd, const SPIMast
         ctx_block.returns = total_length;
     }
 }
-END_API(SPIMaster_TransferSequential)
+END_API

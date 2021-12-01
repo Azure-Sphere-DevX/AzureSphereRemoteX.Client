@@ -12,7 +12,7 @@ int BEGIN_API(ctx_block, RemoteX_PlatformInformation, char *buffer, size_t buffe
     memset(buffer, 0x00, buffer_length);
     memcpy(buffer, ctx_block.data_block.data, ctx_block.returns);
 }
-END_API(GPIO_OpenAsOutput)
+END_API
 
 static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, size_t lenWriteData)
 {
@@ -32,7 +32,7 @@ static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, si
 
     ctx_block.returns = ctx_block.header.respond ? ctx_block.returns : lenWriteData;
 }
-END_API(Storage_Write)
+END_API
 
 static int BEGIN_API(ctx_block, RemoteX_Read, int fd, uint8_t *readData, size_t lenReadData)
 {
@@ -51,7 +51,7 @@ static int BEGIN_API(ctx_block, RemoteX_Read, int fd, uint8_t *readData, size_t 
 
     memcpy(readData, ctx_block.data_block.data, ctx_block.length);
 }
-END_API(RemoteX_Read)
+END_API
 
 static int64_t BEGIN_API(ctx_block, RemoteX_Lseek, int fd, uint64_t offset, int whence)
 {
@@ -61,14 +61,14 @@ static int64_t BEGIN_API(ctx_block, RemoteX_Lseek, int fd, uint64_t offset, int 
 
     SEND_MSG_WITH_DEFAULTS(RemoteX_Lseek, true);
 }
-END_API(Storage_Lseek)
+END_API
 
 static int64_t BEGIN_API(ctx_block, RemoteX_Close, int fd)
 {
     ctx_block.fd = fd;
     SEND_MSG_WITH_DEFAULTS(RemoteX_Close, true);
 }
-END_API(Storage_Lseek)
+END_API
 
 int __wrap_close(int fd)
 {

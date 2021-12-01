@@ -5,7 +5,7 @@ int BEGIN_API(ctx_block, PWM_Open, PWM_ControllerId pwm)
     ctx_block.pwm = pwm;
     SEND_MSG_WITH_DEFAULTS(PWM_Open, true);
 }
-END_API(PWM_Open)
+END_API
 
 int BEGIN_API(ctx_block, PWM_Apply, int pwmFd, PWM_ChannelId pwmChannel, const PwmState *newState)
 {
@@ -18,4 +18,4 @@ int BEGIN_API(ctx_block, PWM_Apply, int pwmFd, PWM_ChannelId pwmChannel, const P
 
     SEND_MSG_WITH_DEFAULTS(PWM_Apply, false);
 }
-END_API(PWM_Apply)
+END_API

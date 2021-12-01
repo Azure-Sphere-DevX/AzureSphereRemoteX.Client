@@ -43,7 +43,7 @@ extern "C" {
 /// <param name="uartConfig">
 ///     A pointer to a <see cref="UART_Config"/> struct that returns the default UART settings.
 /// </param>
-void UART_InitConfig(UART_Config *uartConfig);
+int UART_InitConfig(UART_Config *uartConfig);
 
 /// <summary>
 ///     Opens and configures a UART, and returns a file descriptor to use

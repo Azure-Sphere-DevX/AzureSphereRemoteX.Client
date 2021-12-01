@@ -5,7 +5,7 @@ int BEGIN_API(ctx_block, I2CMaster_Open, I2C_InterfaceId id)
     ctx_block.I2C_InterfaceId = id;
     SEND_MSG_WITH_DEFAULTS(I2CMaster_Open, true);
 }
-END_API(I2CMaster_Open)
+END_API
 
 int BEGIN_API(ctx_block, I2CMaster_SetBusSpeed, int fd, uint32_t speedInHz)
 {
@@ -13,7 +13,7 @@ int BEGIN_API(ctx_block, I2CMaster_SetBusSpeed, int fd, uint32_t speedInHz)
     ctx_block.speedInHz = speedInHz;
     SEND_MSG_WITH_DEFAULTS(I2CMaster_SetBusSpeed, true);
 }
-END_API(I2CMaster_SetBusSpeed)
+END_API
 
 int BEGIN_API(ctx_block, I2CMaster_SetTimeout, int fd, uint32_t timeoutInMs)
 {
@@ -21,7 +21,7 @@ int BEGIN_API(ctx_block, I2CMaster_SetTimeout, int fd, uint32_t timeoutInMs)
     ctx_block.timeoutInMs = timeoutInMs;
     SEND_MSG_WITH_DEFAULTS(I2CMaster_SetTimeout, true);
 }
-END_API(I2CMaster_SetTimeout)
+END_API
 
 ssize_t BEGIN_API(ctx_block, I2CMaster_Write, int fd, I2C_DeviceAddress address, const uint8_t *data, size_t length)
 {
@@ -42,7 +42,7 @@ ssize_t BEGIN_API(ctx_block, I2CMaster_Write, int fd, I2C_DeviceAddress address,
 
     ctx_block.returns = ctx_block.header.respond ? ctx_block.returns : length;
 }
-END_API(I2CMaster_Write)
+END_API
 
 ssize_t BEGIN_API(ctx_block, I2CMaster_WriteThenRead, int fd, I2C_DeviceAddress address, const uint8_t *writeData,
                   size_t lenWriteData, uint8_t *readData, size_t lenReadData)
@@ -66,7 +66,7 @@ ssize_t BEGIN_API(ctx_block, I2CMaster_WriteThenRead, int fd, I2C_DeviceAddress 
 
     memcpy(readData, ctx_block.data_block.data, lenReadData);
 }
-END_API(I2CMaster_WriteThenRead)
+END_API
 
 ssize_t BEGIN_API(ctx_block, I2CMaster_Read, int fd, I2C_DeviceAddress address, uint8_t *buffer, size_t maxLength)
 {
@@ -84,7 +84,7 @@ ssize_t BEGIN_API(ctx_block, I2CMaster_Read, int fd, I2C_DeviceAddress address, 
         memcpy(buffer, ctx_block.data_block.data, ctx_block.returns);
     }
 }
-END_API(I2CMaster_Read)
+END_API
 
 int BEGIN_API(ctx_block, I2CMaster_SetDefaultTargetAddress, int fd, I2C_DeviceAddress address)
 {
@@ -93,4 +93,4 @@ int BEGIN_API(ctx_block, I2CMaster_SetDefaultTargetAddress, int fd, I2C_DeviceAd
 
     SEND_MSG_WITH_DEFAULTS(I2CMaster_SetDefaultTargetAddress, true);
 }
-END_API(I2CMaster_SetDefaultTargetAddress)
+END_API
