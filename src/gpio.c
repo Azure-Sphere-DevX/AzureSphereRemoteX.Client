@@ -13,7 +13,7 @@ int BEGIN_API(ctx_block, GPIO_SetValue, int gpioFd, GPIO_Value_Type value)
 {
     ctx_block.gpioFd = gpioFd;
     ctx_block.value = value;
-    SEND_MSG_WITH_DEFAULTS(GPIO_SetValue, false);
+    SEND_MSG_WITH_DEFAULTS(GPIO_SetValue, true);
 }
 END_API(GPIO_SetValue)
 
