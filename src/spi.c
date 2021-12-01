@@ -172,11 +172,11 @@ ssize_t BEGIN_API(ctx_block, SPIMaster_TransferSequential, int fd, const SPIMast
             data_ptr += transfers[i].length;
         }
 
-        errno = ctx_block.err_no;
+        errno = ctx_block.header.err_no;
     }
     else
     {
-        ctx_block.returns = total_length;
+        ctx_block.header.returns = total_length;
     }
 }
 END_API

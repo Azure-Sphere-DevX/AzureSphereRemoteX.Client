@@ -49,7 +49,6 @@ typedef enum __attribute__((packed))
 
     UART_InitConfig_c,
     UART_Open_c
-
 } SOCKET_CMD;
 
 typedef struct __attribute__((packed))
@@ -59,6 +58,8 @@ typedef struct __attribute__((packed))
     SOCKET_CMD cmd;
     bool respond;
     uint8_t contract_version;
+    int32_t err_no;
+    int32_t returns;
 } CTX_HEADER;
 
 typedef struct __attribute__((packed))
@@ -79,16 +80,12 @@ typedef struct __attribute__((packed))
     int32_t gpioId;
     uint8_t outputMode;
     uint8_t initialValue;
-    int32_t returns;
-    int32_t err_no;
 } GPIO_OpenAsOutput_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     int32_t gpioId;
-    int32_t returns;
-    int32_t err_no;
 } GPIO_OpenAsInput_t;
 
 typedef struct __attribute__((packed))
@@ -96,8 +93,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t gpioFd;
     uint8_t value;
-    int32_t returns;
-    int32_t err_no;
 } GPIO_SetValue_t;
 
 typedef struct __attribute__((packed))
@@ -105,16 +100,12 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t gpioFd;
     uint8_t outValue;
-    int32_t returns;
-    int32_t err_no;
 } GPIO_GetValue_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     int32_t I2C_InterfaceId;
-    int32_t returns;
-    int32_t err_no;
 } I2CMaster_Open_t;
 
 typedef struct __attribute__((packed))
@@ -122,8 +113,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t speedInHz;
-    int32_t returns;
-    int32_t err_no;
 } I2CMaster_SetBusSpeed_t;
 
 typedef struct __attribute__((packed))
@@ -131,8 +120,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t timeoutInMs;
-    int32_t returns;
-    int32_t err_no;
 } I2CMaster_SetTimeout_t;
 
 typedef struct __attribute__((packed))
@@ -141,8 +128,6 @@ typedef struct __attribute__((packed))
     int32_t fd;
     uint8_t address;
     int32_t length;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } I2CMaster_Write_t;
 
@@ -153,8 +138,6 @@ typedef struct __attribute__((packed))
     uint8_t address;
     uint32_t lenWriteData;
     uint32_t lenReadData;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } I2CMaster_WriteThenRead_t;
 
@@ -164,8 +147,6 @@ typedef struct __attribute__((packed))
     int32_t fd;
     uint8_t address;
     uint32_t maxLength;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } I2CMaster_Read_t;
 
@@ -174,16 +155,12 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint8_t address;
-    int32_t returns;
-    int32_t err_no;
 } I2CMaster_SetDefaultTargetAddress_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     uint32_t pwm;
-    int32_t returns;
-    int32_t err_no;
 } PWM_Open_t;
 
 typedef struct __attribute__((packed))
@@ -195,16 +172,12 @@ typedef struct __attribute__((packed))
     uint32_t dutyCycle_nsec;
     uint32_t polarity;
     bool enabled;
-    int32_t returns;
-    int32_t err_no;
 } PWM_Apply_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     uint32_t id;
-    int32_t returns;
-    int32_t err_no;
 } ADC_Open_t;
 
 typedef struct __attribute__((packed))
@@ -212,8 +185,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t channel;
-    int32_t returns;
-    int32_t err_no;
 } ADC_GetSampleBitCount_t;
 
 typedef struct __attribute__((packed))
@@ -222,8 +193,6 @@ typedef struct __attribute__((packed))
     int32_t fd;
     uint32_t channel;
     float referenceVoltage;
-    int32_t returns;
-    int32_t err_no;
 } ADC_SetReferenceVoltage_t;
 
 typedef struct __attribute__((packed))
@@ -232,8 +201,6 @@ typedef struct __attribute__((packed))
     int32_t fd;
     uint32_t channel;
     uint32_t outSampleValue;
-    int32_t returns;
-    int32_t err_no;
 } ADC_Poll_t;
 
 typedef struct __attribute__((packed))
@@ -243,8 +210,6 @@ typedef struct __attribute__((packed))
     int32_t chipSelectId;
     uint8_t csPolarity;
     uint32_t z__magicAndVersion;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_Open_t;
 
 typedef struct __attribute__((packed))
@@ -252,8 +217,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     uint8_t csPolarity;
     uint32_t z__magicAndVersion;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_InitConfig_t;
 
 typedef struct __attribute__((packed))
@@ -261,8 +224,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t speedInHz;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_SetBusSpeed_t;
 
 typedef struct __attribute__((packed))
@@ -270,8 +231,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t mode;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_SetMode_t;
 
 typedef struct __attribute__((packed))
@@ -279,8 +238,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     uint32_t order;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_SetBitOrder_t;
 
 typedef struct __attribute__((packed))
@@ -290,8 +247,6 @@ typedef struct __attribute__((packed))
     uint32_t lenWriteData;
     uint32_t lenReadData;
     uint32_t order;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } SPIMaster_WriteThenRead_t;
 
@@ -300,8 +255,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     uint32_t transferCount;
     uint32_t z__magicAndVersion;
-    int32_t returns;
-    int32_t err_no;
 } SPIMaster_InitTransfers_t;
 
 typedef struct __attribute__((packed))
@@ -310,23 +263,17 @@ typedef struct __attribute__((packed))
     int32_t fd;
     uint32_t transferCount;
     int32_t length;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } SPIMaster_TransferSequential_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
-    int32_t returns;
-    int32_t err_no;
 } Storage_OpenMutableFile_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
-    int32_t returns;
-    int32_t err_no;
 } Storage_DeleteMutableFile_t;
 
 typedef struct __attribute__((packed))
@@ -334,8 +281,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     int32_t length;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } RemoteX_Write_t;
 
@@ -344,8 +289,6 @@ typedef struct __attribute__((packed))
     CTX_HEADER header;
     int32_t fd;
     int32_t length;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } RemoteX_Read_t;
 
@@ -355,32 +298,24 @@ typedef struct __attribute__((packed))
     int32_t fd;
     off_t offset;
     int32_t whence;
-    int32_t returns;
-    int32_t err_no;
 } RemoteX_Lseek_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     int32_t fd;
-    int32_t returns;
-    int32_t err_no;
 } RemoteX_Close_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     int32_t length;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } RemoteX_PlatformInformation_t;
 
 typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } UART_InitConfig_t;
 
@@ -388,7 +323,5 @@ typedef struct __attribute__((packed))
 {
     CTX_HEADER header;
     int32_t uartId;
-    int32_t returns;
-    int32_t err_no;
     DATA_BLOCK data_block; // Must be the last element in the struct
 } UART_Open_t;

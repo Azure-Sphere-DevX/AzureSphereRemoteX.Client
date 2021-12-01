@@ -40,8 +40,8 @@ static int64_t rx_get_now_milliseconds(void)
 #define VARIABLE_BLOCK_SIZE(name, length) (int)(sizeof(name##_t) - sizeof(((name##_t *)0)->data_block.data) + length)
 
 #define END_API        \
-    errno = ctx_block.err_no; \
-    return ctx_block.returns; \
+    errno = ctx_block.header.err_no; \
+    return ctx_block.header.returns; \
     }
 
 #define CTX_BLOCK(TYPE) \

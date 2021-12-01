@@ -10,7 +10,7 @@ int BEGIN_API(ctx_block, RemoteX_PlatformInformation, char *buffer, size_t buffe
              true);
 
     memset(buffer, 0x00, buffer_length);
-    memcpy(buffer, ctx_block.data_block.data, ctx_block.returns);
+    memcpy(buffer, ctx_block.data_block.data, ctx_block.header.returns);
 }
 END_API
 
@@ -29,8 +29,6 @@ static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, si
              VARIABLE_BLOCK_SIZE(RemoteX_Write, lenWriteData),
              CORE_BLOCK_SIZE(RemoteX_Write),
              true);
-
-    ctx_block.returns = ctx_block.header.respond ? ctx_block.returns : lenWriteData;
 }
 END_API
 
