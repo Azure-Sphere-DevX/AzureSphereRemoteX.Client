@@ -68,26 +68,7 @@ static int64_t BEGIN_API(ctx_block, RemoteX_Close, int fd)
 }
 END_API
 
-// int __wrap_close(int fd)
-// {
-//     return RemoteX_Close(fd);
-// }
-
-// off_t __wrap_lseek(int fd, off_t offset, int whence)
-// {
-//     return RemoteX_Lseek(fd, offset, whence);
-// }
-
-// ssize_t __wrap_read(int fd, void *buf, size_t count)
-// {
-//     return RemoteX_Read(fd, buf, count);
-// }
-
-// ssize_t __wrap_write(int fd, const void *buf, size_t count)
-// {
-//     return RemoteX_Write(fd, buf, count);
-// }
-
+#ifdef DARWIN
 int close(int fd)
 {
     return RemoteX_Close(fd);
@@ -107,3 +88,27 @@ ssize_t write(int fd, const void *buf, size_t count)
 {
     return RemoteX_Write(fd, buf, count);
 }
+
+#else
+
+int __wrap_close(int fd)
+{
+    return RemoteX_Close(fd);
+}
+
+off_t __wrap_lseek(int fd, off_t offset, int whence)
+{
+    return RemoteX_Lseek(fd, offset, whence);
+}
+
+ssize_t __wrap_read(int fd, void *buf, size_t count)
+{
+    return RemoteX_Read(fd, buf, count);
+}
+
+ssize_t __wrap_write(int fd, const void *buf, size_t count)
+{
+    return RemoteX_Write(fd, buf, count);
+}
+
+#endif
