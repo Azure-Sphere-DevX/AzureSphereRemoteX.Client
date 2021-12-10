@@ -29,13 +29,15 @@ set(ALL_FILES
 ################################################################################
 add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
 
-# https://github.com/sadiquealy/GCC_Mocking
-# https://titanwolf.org/Network/Articles/Article?AID=b6e0ae3e-3300-4627-afa6-5627f22c6298
+# Turn off assert macro
+add_definitions( -DNDEBUG )
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     target_link_libraries (${PROJECT_NAME} c )
     target_compile_definitions(${PROJECT_NAME} PRIVATE DARWIN)
 else()
+    # https://github.com/sadiquealy/GCC_Mocking
+    # https://titanwolf.org/Network/Articles/Article?AID=b6e0ae3e-3300-4627-afa6-5627f22c6298
     target_link_libraries (${PROJECT_NAME} c "-Wl,--wrap=close -Wl,--wrap=read -Wl,--wrap=write -Wl,--wrap=lseek")
 endif()
 
