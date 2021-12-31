@@ -38,7 +38,10 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 else()
     # https://github.com/sadiquealy/GCC_Mocking
     # https://titanwolf.org/Network/Articles/Article?AID=b6e0ae3e-3300-4627-afa6-5627f22c6298
-    target_link_libraries (${PROJECT_NAME} c "-Wl,--wrap=close -Wl,--wrap=read -Wl,--wrap=write -Wl,--wrap=lseek")
+
+    if(DISABLE_IO_MOCKING)
+        target_link_libraries (${PROJECT_NAME} c "-Wl,--wrap=close -Wl,--wrap=read -Wl,--wrap=write -Wl,--wrap=lseek")
+    endif(DISABLE_IO_MOCKING)
 endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}")

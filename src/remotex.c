@@ -4,10 +4,8 @@ int BEGIN_API(ctx_block, RemoteX_PlatformInformation, char *buffer, size_t buffe
 {
     ctx_block.length = buffer_length;
 
-    SEND_MSG(RemoteX_PlatformInformation,
-             CORE_BLOCK_SIZE(RemoteX_PlatformInformation),
-             VARIABLE_BLOCK_SIZE(RemoteX_PlatformInformation, buffer_length),
-             true);
+    SEND_MSG(RemoteX_PlatformInformation, CORE_BLOCK_SIZE(RemoteX_PlatformInformation),
+             VARIABLE_BLOCK_SIZE(RemoteX_PlatformInformation, buffer_length), true);
 
     memset(buffer, 0x00, buffer_length);
     memcpy(buffer, ctx_block.data_block.data, ctx_block.header.returns);
@@ -16,8 +14,7 @@ END_API
 
 static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, size_t lenWriteData)
 {
-    if (lenWriteData > DATA_BLOCK_DATA_SIZE(RemoteX_Write))
-    {
+    if (lenWriteData > DATA_BLOCK_DATA_SIZE(RemoteX_Write)) {
         return -1;
     }
 
@@ -25,27 +22,20 @@ static int BEGIN_API(ctx_block, RemoteX_Write, int fd, const void *writeData, si
     ctx_block.length = lenWriteData;
     memcpy(ctx_block.data_block.data, writeData, lenWriteData);
 
-    SEND_MSG(RemoteX_Write,
-             VARIABLE_BLOCK_SIZE(RemoteX_Write, lenWriteData),
-             CORE_BLOCK_SIZE(RemoteX_Write),
-             true);
+    SEND_MSG(RemoteX_Write, VARIABLE_BLOCK_SIZE(RemoteX_Write, lenWriteData), CORE_BLOCK_SIZE(RemoteX_Write), true);
 }
 END_API
 
 static int BEGIN_API(ctx_block, RemoteX_Read, int fd, uint8_t *readData, size_t lenReadData)
 {
-    if (lenReadData > DATA_BLOCK_DATA_SIZE(RemoteX_Read))
-    {
+    if (lenReadData > DATA_BLOCK_DATA_SIZE(RemoteX_Read)) {
         return -1;
     }
 
     ctx_block.fd = fd;
     ctx_block.length = lenReadData;
 
-    SEND_MSG(RemoteX_Read,
-             CORE_BLOCK_SIZE(RemoteX_Read),
-             VARIABLE_BLOCK_SIZE(RemoteX_Read, lenReadData),
-             true);
+    SEND_MSG(RemoteX_Read, CORE_BLOCK_SIZE(RemoteX_Read), VARIABLE_BLOCK_SIZE(RemoteX_Read, lenReadData), true);
 
     memcpy(readData, ctx_block.data_block.data, ctx_block.length);
 }
@@ -67,6 +57,8 @@ static int64_t BEGIN_API(ctx_block, RemoteX_Close, int fd)
     SEND_MSG_WITH_DEFAULTS(RemoteX_Close, true);
 }
 END_API
+
+#ifndef DISABLE_IO_MOCKING
 
 #ifdef DARWIN
 int close(int fd)
@@ -112,3 +104,4 @@ ssize_t __wrap_write(int fd, const void *buf, size_t count)
 }
 
 #endif
+#endif // DISABLE_IO_MOCKING
