@@ -41,7 +41,7 @@ else()
 
     if(!DISABLE_IO_MOCKING)
         target_link_libraries (${PROJECT_NAME} c "-Wl,--wrap=close -Wl,--wrap=read -Wl,--wrap=write -Wl,--wrap=lseek")
-    endif(DISABLE_IO_MOCKING)
+    endif()
 endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
