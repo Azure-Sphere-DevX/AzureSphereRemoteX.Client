@@ -10,3 +10,11 @@ Refer to the [DesktopDevX and RemoteX wiki](https://github.com/Azure-Sphere-DevX
 
 ## Including the Azure Sphere RemoteX client library in your project
 
+You would normally submodule the RemoteX client library into your project
+
+```bash
+git submodule add 
+```
+
+## CMakeLists.txt updates
+
