@@ -13,8 +13,15 @@ Refer to the [DesktopDevX and RemoteX wiki](https://github.com/Azure-Sphere-DevX
 You would normally submodule the RemoteX client library into your project
 
 ```bash
-git submodule add 
+git submodule add https://github.com/Azure-Sphere-DevX/AzureSphereRemoteX.Client.git AzureSphereRemoteX
 ```
 
 ## CMakeLists.txt updates
 
+```cmake
+################################################################################
+# Following lines required for AzureSphereRemoteX
+add_subdirectory("AzureSphereRemoteX" applibs)
+target_link_libraries(${PROJECT_NAME} "applibs")
+################################################################################
+```
