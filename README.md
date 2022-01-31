@@ -18,6 +18,8 @@ git submodule add https://github.com/Azure-Sphere-DevX/AzureSphereRemoteX.Client
 
 ## CMakeLists.txt updates
 
+Update the project CMkaeLists.txt file to make the AzureSphereRemoteX client library available in yout project.
+
 ```cmake
 ################################################################################
 # Following lines required for AzureSphereRemoteX
