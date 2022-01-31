@@ -16,6 +16,13 @@ You would normally submodule the RemoteX client library into your project
 git submodule add https://github.com/Azure-Sphere-DevX/AzureSphereRemoteX.Client.git AzureSphereRemoteX
 ```
 
+## Examples using the RemoteX Client Library
+
+You can find examples for the RemoteX Client libary at the following locations:
+
+- [DesktopDevX Examples](https://github.com/Azure-Sphere-DevX/DesktopDevX.Examples)
+- [AzureSphereDevX.Examples](https://github.com/Azure-Sphere-DevX/AzureSphereDevX.Examples)
+
 ## CMakeLists.txt updates
 
 ### Add reference to the RemoteX client library
